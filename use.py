@@ -2,13 +2,16 @@ import progressbar
 import colorama
 from time import sleep
 
-for c in range(0, 3):
+for c in range(0, 4):
     for i in range(1, 51):
         upperbar = progressbar.progressbar(colour=colorama.Fore.GREEN, quantityDisplay="Percent", title="Overall")
-        bar = progressbar.progressbar(colour=colorama.Fore.YELLOW, quantityDisplay="Amount", title="Test bar")
-        upperbar.display(c, 2)
+        bar = progressbar.progressbar(colour=colorama.Fore.YELLOW, quantityDisplay="Amount", title="Quadrant attachment")
+        upperbar.display(c, 4)
+        print("")
         bar.display(i, 50)
         sleep(.2)
         progressbar.clearTerminal()
-        if c == 2:
+        if c == 4:
             break
+
+print("Finish'd")
