@@ -11,12 +11,12 @@ def clearTerminal():
     else:
         print(f"Current OS ({platform}) can't be identified so unable to clear display.")
 
-def lib_getBar(parsed, fullAmount, colour, quantityDisplay, type="default"):
+def lib_getBar(parsed, fullAmount, color, quantityDisplay, type="default"):
     percent = math.floor(100 * float(parsed)/float(fullAmount))
     if type == "large":
-        output = f"|----------|\n|{colour}"
+        output = f"|----------|\n|{color}"
     else:
-        output = f"[{colour}"
+        output = f"[{color}"
     i = 0
     for i in range(1, math.floor(percent/10)+1):
         output = f"{output}="
@@ -39,8 +39,8 @@ def lib_displayQuantity(mode, parsed, fullAmount):
         return("") # reset end="" params
 
 class progressbar:
-    def __init__(self, colour=colorama.Fore.WHITE, quantityDisplay="Amount", title="New bar", barType="default"):
-        self.colour = colour
+    def __init__(self, color=colorama.Fore.WHITE, quantityDisplay="Amount", title="New bar", barType="default"):
+        self.color = color
         self.quantityDisplay = quantityDisplay
         self.title = title
         self.barType = barType
@@ -48,4 +48,4 @@ class progressbar:
         if self.title:
             print(f"{self.title}:")
         i = 0
-        print(lib_getBar(parsed, fullAmount, self.colour, self.quantityDisplay, type=self.barType), end="")
+        print(lib_getBar(parsed, fullAmount, self.color, self.quantityDisplay, type=self.barType), end="")
