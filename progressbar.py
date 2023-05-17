@@ -11,15 +11,22 @@ def clearTerminal():
     else:
         print(f"Current OS ({platform}) can't be identified so unable to clear display.")
 
-def lib_getBar(parsed, fullAmount, colour):
+def lib_getBar(parsed, fullAmount, colour, quantityDisplay, type="default"):
     percent = math.floor(100 * float(parsed)/float(fullAmount))
-    output = f"[{colour}"
+    if type == "large":
+        output = f"|----------|\n|{colour}"
+    else:
+        output = f"[{colour}"
     i = 0
     for i in range(1, math.floor(percent/10)+1):
         output = f"{output}="
     for x in range(i, 10):
         output = f"{output} "
-    return f"{output}{colorama.Style.RESET_ALL}]"
+    
+    if type == "large":
+        return f"{output}{colorama.Style.RESET_ALL}| {lib_displayQuantity(quantityDisplay, parsed, fullAmount)}\n|----------|"
+    else:
+        return f"{output}{colorama.Style.RESET_ALL}] {lib_displayQuantity(quantityDisplay, parsed, fullAmount)}"
 
 def lib_displayQuantity(mode, parsed, fullAmount):
     if mode == "Amount":
@@ -32,14 +39,13 @@ def lib_displayQuantity(mode, parsed, fullAmount):
         return("") # reset end="" params
 
 class progressbar:
-    def __init__(self, colour=colorama.Fore.WHITE, quantityDisplay="Percent", title=None):
+    def __init__(self, colour=colorama.Fore.WHITE, quantityDisplay="Amount", title="New bar", barType="default"):
         self.colour = colour
         self.quantityDisplay = quantityDisplay
         self.title = title
+        self.barType = barType
     def display(self, parsed, fullAmount):
         if self.title:
             print(f"{self.title}:")
-
-            i = 0
-            print(lib_getBar(parsed, fullAmount, self.colour), end="")
-            print(lib_displayQuantity(self.quantityDisplay, parsed, fullAmount))
+        i = 0
+        print(lib_getBar(parsed, fullAmount, self.colour, self.quantityDisplay, type=self.barType), end="")
