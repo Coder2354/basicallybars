@@ -1,4 +1,4 @@
-# progress-bars
+# basicbar
 This is a small python library. (My first one!)
 Its goal is to make algorithms easier to use, by
 displaying visual feedback on the progress of the
