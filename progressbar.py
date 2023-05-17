@@ -13,13 +13,13 @@ def clearTerminal():
 
 def getBar(parsed, fullAmount):
     percent = math.floor(100 * float(parsed)/float(fullAmount))
-    output = ""
+    output = "["
     i = 0
     for i in range(1, math.floor(percent/10)+1):
         output = f"{output}="
     for x in range(i, 10):
         output = f"{output} "
-    return output
+    return f"{output}{colorama.Style.RESET_ALL}]"
 
 class progressbar:
     def __init__(self, colour=colorama.Fore.WHITE, quantityDisplay="Percent", title=None):
@@ -29,11 +29,10 @@ class progressbar:
     def display(self, parsed, fullAmount):
         if self.title:
             print(f"{self.title}:")
-            print(f"[{self.colour}", end="")
+            print(f"{self.colour}", end="")
 
             i = 0
-            print(getBar(parsed, fullAmount), end="")
-            print(f"{colorama.Style.RESET_ALL}]", end="")
+            print(getBar(parsed, fullAmount))
 
             if self.quantityDisplay == "Amount":
                 print(f" ({parsed}/{fullAmount})")
