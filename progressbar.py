@@ -37,5 +37,7 @@ class progressbar:
                 print(f" ({parsed}/{fullAmount})")
             elif self.quantityDisplay == "Percent":
                 print(f" {math.floor(100 * float(parsed)/float(fullAmount))}%")
+            elif self.quantityDisplay == "Remaining":
+                print(f" {fullAmount-parsed} remaining...")
             else:
                 print("") # reset end="" params
