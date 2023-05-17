@@ -11,9 +11,9 @@ def clearTerminal():
     else:
         print(f"Current OS ({platform}) can't be identified so unable to clear display.")
 
-def getBar(parsed, fullAmount):
+def getBar(parsed, fullAmount, colour):
     percent = math.floor(100 * float(parsed)/float(fullAmount))
-    output = "["
+    output = f"[{colour}"
     i = 0
     for i in range(1, math.floor(percent/10)+1):
         output = f"{output}="
@@ -29,10 +29,9 @@ class progressbar:
     def display(self, parsed, fullAmount):
         if self.title:
             print(f"{self.title}:")
-            print(f"{self.colour}", end="")
 
             i = 0
-            print(getBar(parsed, fullAmount))
+            print(getBar(parsed, fullAmount, self.colour), end="")
 
             if self.quantityDisplay == "Amount":
                 print(f" ({parsed}/{fullAmount})")
