@@ -29,11 +29,12 @@ def lib_getBar(parsed, fullAmount, color, quantityDisplay, type="default"):
         return f"{output}{colorama.Style.RESET_ALL}] {lib_displayQuantity(quantityDisplay, parsed, fullAmount)}"
 
 def lib_displayQuantity(mode, parsed, fullAmount):
-    if mode == "Amount":
+    mode = mode.lower()
+    if mode == "amount":
         return(f" ({parsed}/{fullAmount})")
-    elif mode == "Percent":
+    elif mode == "percent":
         return(f" {math.floor(100 * float(parsed)/float(fullAmount))}%")
-    elif mode == "Remaining":
+    elif mode == "remaining":
         return(f" {fullAmount-parsed} remaining...")
     else:
         return("") # reset end="" params
