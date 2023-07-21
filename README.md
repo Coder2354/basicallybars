@@ -10,6 +10,8 @@ to improve my terrible code.</p>
 
 ## Use
 
+**⚠️Important! If used in a way where calling display() is frequent, use threading to ensure no execution slowdown.**
+
 **Create a new loading bar:**
 
 ```
