@@ -3,8 +3,8 @@
 <p>This is a small python library. 
 Its goal is to make algorithms easier to use, by
 displaying visual feedback on the progress of the
-algorithm! It is quite customisable and uses the
-colorama library to add colours. WIP; feel free
+algorithm! It's also quite customisable.
+Yup, that's literally it. WIP; feel free
 to improve my terrible code.</p>
 [Publishing to PyPI soon; stay tuned.]
 
@@ -19,13 +19,6 @@ bar = basicbar.progressbar()
 **Update & set values of that bar:**
 ```
 bar.display(x, y) # Note: "x" is the amount done in this is example while "y" is the full amount of things that have to be done
-```
-
-**Colo(u)rs:**
-
-```
-from colorama import Fore # Colorama is the used color library and is bundled with basicbar.
-bar = basicbar.progressbar(color=fore.CYAN) # Create a progress bar with the loading color being cyan.
 ```
 
 **Different loading indicators**
