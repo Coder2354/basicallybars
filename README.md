@@ -1,4 +1,4 @@
-# basicallybars: a beginner's attempt at a python library.
+# basicallybars: a beginner's attempt at a python library
 
 <p>This is a small python library. 
 Its goal is to make algorithms easier to use, by
@@ -6,7 +6,8 @@ displaying visual feedback on the progress of the
 algorithm! It's also quite customisable.
 Yup, that's literally it. WIP; feel free
 to improve my terrible code.</p>
-[Publishing to PyPI soon; stay tuned.]
+
+Link to PyPi is [here](https://pypi.org/project/basicallybars/)
 
 ## Use
 
