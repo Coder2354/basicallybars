@@ -1,9 +1,8 @@
-import colorama
 import math
 
-def lib_get_bar(parsed, full_amount, color, quantity_display):
+def lib_get_bar(parsed, full_amount, starts_with, ends_with, quantity_display):
     percent = math.floor(100 * float(parsed)/float(full_amount))
-    output = f"[{color}"
+    output = f"[{starts_with}"
     i = 0
     for i in range(1, math.floor(percent/10)+1):
         output = f"{output}="
@@ -11,9 +10,9 @@ def lib_get_bar(parsed, full_amount, color, quantity_display):
         output = f"{output} "
     
     if type == "large":
-        return f"{output}{colorama.Style.RESET_ALL}| {lib_display_quantity(quantity_display, parsed, full_amount)}\n|----------|"
+        return f"{output}{ends_with}| {lib_display_quantity(quantity_display, parsed, full_amount)}\n|----------|"
     else:
-        return f"{output}{colorama.Style.RESET_ALL}] {lib_display_quantity(quantity_display, parsed, full_amount)}"
+        return f"{output}{ends_with}] {lib_display_quantity(quantity_display, parsed, full_amount)}"
 
 def lib_display_quantity(mode, parsed, full_amount):
     mode = mode.lower()
@@ -29,8 +28,9 @@ def lib_display_quantity(mode, parsed, full_amount):
         return(f" {full_amount-parsed} remaining...")
 
 class progressbar:
-    def __init__(self, color=colorama.Fore.WHITE, quantity_display="Amount", title="New bar:"):
-        self.color = color
+    def __init__(self, quantity_display="Amount", title="New bar:", starts_with="", ends_with=""):
+        self.starts_with = starts_with
+        self.ends_with = ends_with
         self.quantity_display = quantity_display
         self.title = title
 
@@ -43,9 +43,9 @@ class progressbar:
             print(f"{self.title}")
 
         if parsed < full_amount:
-            print(lib_get_bar(parsed, full_amount, self.color, self.quantity_display), end='\r', flush=True)
+            print(lib_get_bar(parsed, full_amount, self.starts_with, self.ends_with, self.quantity_display), end='\r', flush=True)
         elif self.final_call == 0:
-            print(lib_get_bar(parsed, full_amount, self.color, self.quantity_display))
+            print(lib_get_bar(parsed, full_amount, self.starts_with, self.ends_with, self.quantity_display))
             self.final_call = 1
 
         elif self.final_call == 1:
