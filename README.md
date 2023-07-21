@@ -10,6 +10,11 @@ to improve my terrible code.</p>
 
 ## Use
 
+**Import :)**
+```
+from basicbar import basicbar
+```
+
 **Create a new loading bar:**
 
 ```
