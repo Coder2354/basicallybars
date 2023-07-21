@@ -1,6 +1,6 @@
-# basicbar
+# basicbar: a beginner's attempt at a python library.
 
-<p>This is a small python library. (My first one!)
+<p>This is a small python library. 
 Its goal is to make algorithms easier to use, by
 displaying visual feedback on the progress of the
 algorithm! It is quite customisable and uses the
