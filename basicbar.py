@@ -1,22 +1,9 @@
 import colorama
-import os
 import math
-from sys import platform
 
-def clearTerminal():
-    if platform == "linux" or platform == "linux2" or platform == "darwin":
-        os.system("clear")
-    elif platform == "win32":
-        os.system("cls")
-    else:
-        print(f"Current OS ({platform}) can't be identified so unable to clear display.")
-
-def lib_getBar(parsed, fullAmount, color, quantityDisplay, type="default"):
-    percent = math.floor(100 * float(parsed)/float(fullAmount))
-    if type == "large":
-        output = f"|----------|\n|{color}"
-    else:
-        output = f"[{color}"
+def lib_get_bar(parsed, full_amount, color, quantity_display):
+    percent = math.floor(100 * float(parsed)/float(full_amount))
+    output = f"[{color}"
     i = 0
     for i in range(1, math.floor(percent/10)+1):
         output = f"{output}="
@@ -24,29 +11,43 @@ def lib_getBar(parsed, fullAmount, color, quantityDisplay, type="default"):
         output = f"{output} "
     
     if type == "large":
-        return f"{output}{colorama.Style.RESET_ALL}| {lib_displayQuantity(quantityDisplay, parsed, fullAmount)}\n|----------|"
+        return f"{output}{colorama.Style.RESET_ALL}| {lib_display_quantity(quantity_display, parsed, full_amount)}\n|----------|"
     else:
-        return f"{output}{colorama.Style.RESET_ALL}] {lib_displayQuantity(quantityDisplay, parsed, fullAmount)}"
+        return f"{output}{colorama.Style.RESET_ALL}] {lib_display_quantity(quantity_display, parsed, full_amount)}"
 
-def lib_displayQuantity(mode, parsed, fullAmount):
+def lib_display_quantity(mode, parsed, full_amount):
     mode = mode.lower()
+
+    if mode not in ("amount", "percent", "remaining"):
+        mode = "amount"
+
     if mode == "amount":
-        return(f" ({parsed}/{fullAmount})")
+        return(f" ({parsed}/{full_amount})")
     elif mode == "percent":
-        return(f" {math.floor(100 * float(parsed)/float(fullAmount))}%")
+        return(f" {math.floor(100 * float(parsed)/float(full_amount))}%")
     elif mode == "remaining":
-        return(f" {fullAmount-parsed} remaining...")
-    else:
-        return("") # reset end="" params
+        return(f" {full_amount-parsed} remaining...")
 
 class progressbar:
-    def __init__(self, color=colorama.Fore.WHITE, quantityDisplay="Amount", title="New bar", barType="default"):
+    def __init__(self, color=colorama.Fore.WHITE, quantity_display="Amount", title="New bar:"):
         self.color = color
-        self.quantityDisplay = quantityDisplay
+        self.quantity_display = quantity_display
         self.title = title
-        self.barType = barType
-    def display(self, parsed, fullAmount):
-        if self.title:
-            print(f"{self.title}:")
-        i = 0
-        print(lib_getBar(parsed, fullAmount, self.color, self.quantityDisplay, type=self.barType), end="")
+
+        self.title_displayed = False
+        self.final_call = 0 # 0 means it hasnt reached its goal, 1 means it has but no notif and 2 means notif is done
+        
+    def display(self, parsed, full_amount):
+        if not self.title_displayed and self.title:
+            self.title_displayed = True
+            print(f"{self.title}")
+
+        if parsed < full_amount:
+            print(lib_get_bar(parsed, full_amount, self.color, self.quantity_display), end='\r', flush=True)
+        elif self.final_call == 0:
+            print(lib_get_bar(parsed, full_amount, self.color, self.quantity_display))
+            self.final_call = 1
+
+        elif self.final_call == 1:
+            print(f"You are calling .display(), even though your bar is finished. ({parsed}/{full_amount})")
+            self.final_call = 2
