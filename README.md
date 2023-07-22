@@ -1,5 +1,7 @@
 # basicallybars: a beginner's attempt at a python library
 
+![PyPI - License](https://img.shields.io/pypi/l/basicallybars) ![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/Coder2354/basicallybars?label=last%20release)
+
 <p>This is a small python library. 
 Its goal is to make algorithms easier to use, by
 displaying visual feedback on the progress of the
